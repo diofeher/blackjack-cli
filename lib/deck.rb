@@ -1,5 +1,6 @@
 require_relative 'card.rb'
 
+# Deck with cards used by the game
 class Deck
   attr_accessor :suits, :cards
   def initialize

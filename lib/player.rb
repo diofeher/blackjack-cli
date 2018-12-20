@@ -1,42 +1,41 @@
 require 'byebug'
 
+# Player with cards and some interactions
 class Player
+  UPPER_LIMIT = 21
   INITIAL_MONEY = 200
-  attr_accessor :money, :cards, :current_bet, :number
-  def initialize(number)
-    @number = number
+  attr_accessor :money, :cards, :current_bet, :name
+  def initialize(name)
+    @name = name
     @money = INITIAL_MONEY
     @cards = []
-    @include_face_card = false
     @current_bet = 0
   end
 
-  def score(card)
-    if card.value == 'A'
-      @include_face_card ? 10 : (return 1)
-    elsif %w[J Q K].include? card.value
-      10
-    else
-      card.value
-    end
-  end
-
   def total_hand
-    @cards.map { |card| score(card) }.inject(0, &:+)
+    ace_count = @cards.count { |c| c.value == 'A' }
+    total = @cards.map(&:score).inject(0, &:+)
+    until ace_count.zero?
+      ace_count -= 1
+      total += if total + 10 + (ace_count - 1) > UPPER_LIMIT
+                 1
+               else
+                 11
+               end
+    end
+    total
   end
 
   def total_final
-    total_hand <= 21 ? total_hand : 0
+    total_hand <= UPPER_LIMIT ? total_hand : 0
   end
 
   def add_card(card)
-    @include_face_card = true if %w[J Q K].include? card
     @cards.push card
-    @cards
   end
 
   def show_hand
-    @cards.map &:to_s
+    @cards.map(&:to_s)
   end
 
   def bet(value)
@@ -52,5 +51,10 @@ class Player
   def restart
     @cards = []
     @current_bet = 0
+  end
+
+  def show_status
+    puts "Cards: #{show_hand}"
+    puts "Total: #{total_hand}"
   end
 end
