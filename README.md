@@ -1,18 +1,18 @@
 Blackjack game
 ---------------
+Read the rules:
+
+https://en.wikipedia.org/wiki/Blackjack
 
 Run the game:
 
 ```rb blackjack.rb```
 
-king, queen, jack - 10 points
-numbers - own values
-ace - 1 or 11
 
-hit -
-request another card
+Run the tests:
 
-stand -
-stay current hand
+```rb test/test.rb```
 
-double-down or split
+Dependencies
+------------
+Made with Ruby 2.4.1
