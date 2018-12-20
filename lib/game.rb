@@ -7,42 +7,47 @@ class Game
   def initialize
     puts 'Select the number of players: '
     @number_of_players = gets.to_i
-    @dealer = Player.new(0)
+    @dealer = Player.new('Dealer')
     @players = Array.new(@number_of_players) do |i|
       Player.new('Player ' + (i + 1).to_s)
     end
     @deck = Deck.new
   end
 
-  def select_option(player)
+  def select_option(player, hand)
     loop do
       puts 'Please select:'
       puts '1) Hit'
       puts '2) Stand'
-      puts '3) Double Down'
-      puts '4) Split'
+      puts '3) Double Down' if hand.can_double_down
+      puts '4) Split' if hand.can_split
       option = gets.strip
       case option
       when '1'
         puts 'HIT!'
-        player.add_card @deck.hit
-        player.show_status
-        total = player.total_hand
-        break if total >= Player::UPPER_LIMIT
+        hand.add_card @deck.hit
+        puts hand.status
+        total = hand.total_hand
+        break if total >= Hand::UPPER_LIMIT
       when '2'
         puts 'Stop!'
         break
       when '3'
-        curr_bet = player.current_bet * 2
-        if player.bet(curr_bet)
-          player.add_card @deck.hit
-          puts player.show_status
+        curr_bet = hand.current_bet * 2
+        if hand.bet(curr_bet)
+          hand.add_card @deck.hit
+          puts hand.status
           break
         else
           puts 'Cannot double down.'
         end
       when '4'
-        # TODO: Implement that
+        next unless hand.can_split
+
+        second_hand = player.split!
+        hand.add_card(@deck.hit)
+        second_hand.add_card(@deck.hit)
+        puts hand.status
       else
         puts 'Invalid option.'
       end
@@ -50,42 +55,49 @@ class Game
   end
 
   def players_round
-    @dealer.add_card @deck.hit
-    @dealer.add_card @deck.hit
+    @dealer.hands[0].add_card @deck.hit
+    @dealer.hands[0].add_card @deck.hit
     @players.each do |player|
-      player.add_card @deck.hit
-      player.add_card @deck.hit
       next if player.money.zero?
 
-      puts "\n#{player.name}: $#{player.money} left"
-      player.show_status
-      while player.current_bet.zero?
-        puts 'Put your current bet:'
-        curr_bet = gets.to_i
-        player.bet(curr_bet)
-      end
-      break if player.total_hand == Player::UPPER_LIMIT
+      player.hands[0].add_card @deck.hit
+      player.hands[0].add_card @deck.hit
+      player.hands.each do |hand|
+        puts "\n#{player.name}: $#{player.money} left"
+        puts hand.status
+        while hand.current_bet.zero?
+          puts 'Put your current bet:'
+          curr_bet = gets.to_i
+          hand.bet(curr_bet)
+        end
+        break if hand.total_hand == Hand::UPPER_LIMIT
 
-      select_option(player)
+        select_option(player, hand)
+      end
     end
   end
 
   def dealer_round
     show_header('DEALER TIME')
-    loop do
-      puts "Dealer Cards: #{@dealer.show_hand}"
-      total = @dealer.total_hand
-      puts "Total: #{total}"
-      total <= 17 ? @dealer.add_card(@deck.hit) : break
-    end
+    hand = @dealer.hands[0]
+    puts hand.status
+    total = hand.total_hand
+    hand.add_card(@deck.hit) if total < 17
+    puts hand.status
   end
 
   def finish_round
     @players.each do |player|
-      if player.total_final > @dealer.total_final
-        player.money += player.current_bet * 2
-      elsif player.total_final < @dealer.total_final
-        player.money -= player.current_bet
+      player.hands.each do |hand|
+        if hand.total_final > @dealer.hands[0].total_final
+          player.money += if player.splitted
+                            hand.current_bet
+                          else
+                            hand.current_bet * 3 / 2
+                          end
+        elsif hand.total_final < @dealer.hands[0].total_final
+          player.money -= hand.current_bet
+        end
       end
       player.restart
     end
