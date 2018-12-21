@@ -50,7 +50,7 @@ class Game
 
   def hit(hand)
     hand.add_card @deck.hit
-    hand.total_hand
+    hand.total_hand <= Hand::UPPER_LIMIT
   end
 
   def double_down(hand)
