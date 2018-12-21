@@ -8,6 +8,10 @@ class Hand
     @current_bet = current_bet
   end
 
+  def blackjack?
+    hand.total_hand == UPPER_LIMIT
+  end
+
   def remove_card
     @cards.pop
   end

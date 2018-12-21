@@ -50,7 +50,7 @@ class GameInteraction
           curr_bet = gets.to_i
           hand.bet(curr_bet)
         end
-        break if hand.total_hand == Hand::UPPER_LIMIT
+        break if hand.blackjack?
 
         select_option(player, hand)
       end
