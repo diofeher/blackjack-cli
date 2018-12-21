@@ -14,7 +14,7 @@ class Hand
 
   def add_card(card)
     @cards.push card
-    end
+  end
 
   def total_hand
     ace_count = @cards.count { |c| c.value == 'A' }

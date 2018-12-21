@@ -11,8 +11,8 @@ end
 $stdin = FakeInput.new
 
 class TestGame < Test::Unit::TestCase
-    def test_game
-        game = Game.new
-        assert_equal(game.number_of_players, 1)
-    end
+  def test_game
+    game = Game.new
+    assert_equal(game.number_of_players, 1)
+  end
 end

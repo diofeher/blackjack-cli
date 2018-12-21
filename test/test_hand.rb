@@ -32,11 +32,9 @@ class TestHand < Test::Unit::TestCase
   def test_split
     player = Player.new('Test')
     hand = player.hands[0]
-    card1 = Card.new('♣', '9')
-    card2 = Card.new('♥', '9')
     hand.current_bet = 100
-    hand.add_card card1
-    hand.add_card card2
+    hand.add_card Card.new('♣', '9')
+    hand.add_card Card.new('♥', '9')
     assert_true(hand.can_split)
     second_hand = player.split!
     assert_equal(hand.cards.length, 1)
