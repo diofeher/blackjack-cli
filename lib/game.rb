@@ -77,7 +77,7 @@ class Game
   end
 
   def dealer_round
-    show_header('DEALER TIME')
+    show_header('DEALER\'S TIME!')
     hand = @dealer.hands[0]
     puts hand.status
     total = hand.total_hand
