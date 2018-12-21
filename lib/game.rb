@@ -15,13 +15,17 @@ class Game
     @deck = Deck.new
   end
 
+  def show_menu(hand)
+    puts 'Please select:'
+    puts '1) Hit'
+    puts '2) Stand'
+    puts '3) Double Down' if hand.can_double_down
+    puts '4) Split' if hand.can_split
+  end
+
   def select_option(player, hand)
     loop do
-      puts 'Please select:'
-      puts '1) Hit'
-      puts '2) Stand'
-      puts '3) Double Down' if hand.can_double_down
-      puts '4) Split' if hand.can_split
+      show_menu(hand)
       option = gets.strip
       case option
       when '1'
