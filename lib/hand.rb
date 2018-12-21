@@ -9,7 +9,7 @@ class Hand
   end
 
   def blackjack?
-    hand.total_hand == UPPER_LIMIT
+    total_hand == UPPER_LIMIT
   end
 
   def remove_card

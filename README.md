@@ -1,5 +1,6 @@
 Blackjack game
 ---------------
+
 Read the rules:
 
 https://en.wikipedia.org/wiki/Blackjack
