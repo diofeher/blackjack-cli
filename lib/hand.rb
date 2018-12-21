@@ -41,7 +41,9 @@ class Hand
   end
 
   def can_double_down
-    (@cards.length == 2) && !@player.splitted
+    @cards.length == 2 &&
+      !@player.splitted &&
+      @current_bet * 2 <= @player.money
   end
 
   def show_hand
