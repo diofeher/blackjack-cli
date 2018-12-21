@@ -35,7 +35,9 @@ class Hand
   end
 
   def can_split
-    (@cards.length == 2) && (@cards[0].value == @cards[1].value) && @player.hands.length < 2
+    (@cards.length == 2) &&
+      (@cards[0].value == @cards[1].value) &&
+      @player.hands.length < 2
   end
 
   def can_double_down
