@@ -42,4 +42,16 @@ class TestHand < Test::Unit::TestCase
     assert_equal(second_hand.cards.length, 1)
     assert_equal(second_hand.current_bet, 50)
   end
+
+  def test_blackjack?
+    hand = Hand.new(0)
+    hand.add_card Card.new('♣', 'A')
+    hand.add_card Card.new('♥', 'Q')
+    assert_true(hand.blackjack?)
+
+    hand = Hand.new(0)
+    hand.add_card Card.new('♣', 'A')
+    hand.add_card Card.new('♥', '9')
+    assert_false(hand.blackjack?)
+  end
 end
