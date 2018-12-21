@@ -2,11 +2,12 @@ require_relative 'game.rb'
 
 # Game where all the interactions happen and I/O
 class GameInteraction
+  MAX_PLAYERS = 7
   attr_reader :game
   def initialize
     number = 0
-    puts 'Select the number of players: '
-    number = gets.to_i while number.zero?
+    puts "Select the number of players (MAX: #{MAX_PLAYERS}): "
+    number = gets.to_i while number.zero? or number > MAX_PLAYERS
     @game = Game.new(number)
   end
 
@@ -63,9 +64,10 @@ class GameInteraction
       case option
       when '1'
         puts 'HIT!'
-        total = @game.hit hand
-        puts hand.status
-        break if total >= Hand::UPPER_LIMIT
+        if !@game.hit(hand)
+          puts hand.status
+          break
+        end
       when '2'
         puts 'STAND!'
         break
