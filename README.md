@@ -1,6 +1,6 @@
 Blackjack game
 ---------------
-[![asciicast](https://asciinema.org/a/217869.svg)](https://asciinema.org/a/217869)
+[![asciicast](https://asciinema.org/a/p8VLuHZNWoudGGEGUnrjLMfnV.svg)](https://asciinema.org/a/p8VLuHZNWoudGGEGUnrjLMfnV)
 
 Read the rules:
 
