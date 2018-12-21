@@ -30,6 +30,7 @@ class TestGame < Test::Unit::TestCase
     game = Game.new(2)
     player = game.players[0]
     game.hit player.hand
+    assert_equal(player.hand.cards.length, 1)
   end
 
   def test_double_down
