@@ -4,10 +4,11 @@ class Card
   def initialize(suit, value)
     @suit = suit
     @value = value
+    @color = %w(♥ ♦).include?(suit) ? '31' : '30'
   end
 
   def to_s
-    "#{@suit}#{@value.to_s}"
+    "\e[#{@color};107m#{@suit}#{@value.to_s}\e[0m"
   end
 
   def score

@@ -51,7 +51,7 @@ class Hand
   end
 
   def show_hand
-    @cards.map(&:to_s)
+    @cards.map(&:to_s).join(" ")
   end
 
   def status
