@@ -1,18 +1,17 @@
 require 'test/unit'
 require_relative '../lib/game.rb'
 
-class FakeInput
-  def gets
-    @stubbed_input ||= %w[1]
-    @stubbed_input.shift
-  end
-end
-
-$stdin = FakeInput.new
-
 class TestGame < Test::Unit::TestCase
-  def test_game
-    game = Game.new
-    assert_equal(game.number_of_players, 1)
+  def setup
+    @game = Game.new(2)
+    assert_equal(@game.players.length, 2)
+  end
+
+  def test_new_round
+    @game.new_round
+    @game.players.each do |player|
+      assert_equal(player.hands[0].cards.length, 2)
+    end
+    assert_equal(@game.dealer.hands[0].cards.length, 2)
   end
 end

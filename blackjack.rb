@@ -1,4 +1,4 @@
-require_relative 'lib/game.rb'
+require_relative 'lib/game_interaction.rb'
 
-game = Game.new
+game = GameInteraction.new
 game.play
