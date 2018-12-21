@@ -4,7 +4,7 @@ require_relative '../lib/player.rb'
 
 # Testing basic interactions with the game
 class TestHand < Test::Unit::TestCase
-  def test_ace_little
+  def test_ace_blackjack
     hand = Hand.new(1)
     hand.add_card Card.new('♣', 'J')
     hand.add_card Card.new('♣', 'A')
