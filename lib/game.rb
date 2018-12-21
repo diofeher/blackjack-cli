@@ -4,7 +4,7 @@ require_relative 'deck.rb'
 # Game with business logic
 class Game
   attr_accessor :players, :dealer, :deck
-  def initialize(number_of_players = 0, initial_money=200)
+  def initialize(number_of_players = 0, initial_money = 200)
     @dealer = Player.new('Dealer')
     @players = Array.new(number_of_players) do |i|
       Player.new('Player ' + (i + 1).to_s, initial_money)
