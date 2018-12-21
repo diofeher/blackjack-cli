@@ -10,6 +10,6 @@ class TestDeck < Test::Unit::TestCase
 
   def test_draw
     deck = Deck.new
-    assert_true(deck.draw.instance_of? Card)
+    assert_true(deck.draw.instance_of?(Card))
   end
 end
