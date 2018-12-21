@@ -8,7 +8,13 @@ class FakeInput
   end
 end
 
+class FakeOutput
+  def write(text)
+  end
+end
+
 $stdin = FakeInput.new
+$stdout = FakeOutput.new
 
 class TestGameInteraction < Test::Unit::TestCase
   def test_game_setup
