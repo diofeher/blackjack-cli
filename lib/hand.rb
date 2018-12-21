@@ -2,7 +2,7 @@
 class Hand
   UPPER_LIMIT = 21
   attr_accessor :cards, :current_bet
-  def initialize(player, current_bet=0)
+  def initialize(player, current_bet = 0)
     @player = player
     @cards = []
     @current_bet = current_bet

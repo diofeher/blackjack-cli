@@ -7,9 +7,7 @@ class Game
   def initialize
     @number_of_players = 0
     puts 'Select the number of players: '
-    while @number_of_players == 0 do
-      @number_of_players = gets.to_i
-    end
+    @number_of_players = gets.to_i while @number_of_players == 0
     @dealer = Player.new('Dealer')
     @players = Array.new(@number_of_players) do |i|
       Player.new('Player ' + (i + 1).to_s)
