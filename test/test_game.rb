@@ -44,4 +44,9 @@ class TestGame < Test::Unit::TestCase
     assert_equal(hand.cards.length, 3)
     assert_equal(hand.current_bet, 200)
   end
+
+  def test_initial_money
+    game = Game.new(2, 500)
+    assert_equal(game.players[0].money, 500)
+  end
 end
