@@ -15,7 +15,7 @@ class Deck
     @cards = @initial_cards
   end
 
-  def hit
+  def draw
     @cards.pop
   end
 end

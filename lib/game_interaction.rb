@@ -7,7 +7,7 @@ class GameInteraction
   def initialize
     number = 0
     puts "Select the number of players (MAX: #{MAX_PLAYERS}): "
-    number = gets.to_i while number.zero? or number > MAX_PLAYERS
+    number = gets.to_i while number.zero? || (number > MAX_PLAYERS)
     @game = Game.new(number)
   end
 
@@ -66,7 +66,7 @@ class GameInteraction
         puts 'HIT!'
         success = @game.hit(hand)
         puts hand.status
-        break if !success
+        break unless success
       when '2'
         puts 'STAND!'
         break

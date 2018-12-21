@@ -13,16 +13,16 @@ class Game
   end
 
   def new_round
-    2.times { @dealer.hand.add_card @deck.hit }
+    2.times { @dealer.hand.add_card @deck.draw }
     @players.each do |player|
-      2.times { player.hand.add_card @deck.hit }
+      2.times { player.hand.add_card @deck.draw }
     end
   end
 
   def dealer_round
     hand = @dealer.hand
     total = hand.total_hand
-    hand.add_card(@deck.hit) if total < 17
+    hand.add_card(@deck.draw) if total < 17
   end
 
   def finish_round
@@ -49,14 +49,14 @@ class Game
   end
 
   def hit(hand)
-    hand.add_card @deck.hit
+    hand.add_card @deck.draw
     hand.total_hand <= Hand::UPPER_LIMIT
   end
 
   def double_down(hand)
     curr_bet = hand.current_bet * 2
     if hand.bet(curr_bet)
-      hand.add_card @deck.hit 
+      hand.add_card @deck.draw
     else
       false
     end
@@ -65,7 +65,7 @@ class Game
   def split(player)
     hand = player.hand
     second_hand = player.split!
-    hand.add_card(@deck.hit)
-    second_hand.add_card(@deck.hit)
+    hand.add_card(@deck.draw)
+    second_hand.add_card(@deck.draw)
   end
 end

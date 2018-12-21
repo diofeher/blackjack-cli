@@ -4,7 +4,7 @@ require_relative 'hand.rb'
 # Player with cards and some interactions
 class Player
   INITIAL_MONEY = 200
-  attr_accessor :money, :name, :hand, :hands, :splitted
+  attr_accessor :money, :name, :hands, :splitted
   def initialize(name)
     @name = name
     @money = INITIAL_MONEY
