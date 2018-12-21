@@ -48,7 +48,8 @@ class GameInteraction
         while hand.current_bet.zero?
           puts 'Put your current bet:'
           curr_bet = gets.to_i
-          hand.bet(curr_bet)
+          success, msg = hand.bet(curr_bet)
+          puts msg unless success
         end
         break if hand.blackjack?
 

@@ -60,11 +60,12 @@ class Hand
 
   def bet(value)
     if value % 10 != 0
-      puts 'You need to bet multiples of 10'
+      [false, 'You need to bet multiples of 10']
     elsif value > @player.money
-      puts 'You do not have that money to bet'
+      [false, 'You do not have that money to bet']
     else
       @current_bet = value
+      [true, '']
     end
   end
 end

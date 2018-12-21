@@ -55,11 +55,9 @@ class Game
 
   def double_down(hand)
     curr_bet = hand.current_bet * 2
-    if hand.bet(curr_bet)
-      hand.add_card @deck.draw
-    else
-      false
-    end
+    success, msg = hand.bet(curr_bet)
+    hand.add_card @deck.draw if success
+    success
   end
 
   def split(player)
