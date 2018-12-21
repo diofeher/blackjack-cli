@@ -7,4 +7,9 @@ class TestDeck < Test::Unit::TestCase
     deck = Deck.new
     assert_equal(deck.cards.length, 52)
   end
+
+  def test_draw
+    deck = Deck.new
+    assert_true(deck.draw.instance_of? Card)
+  end
 end
