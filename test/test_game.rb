@@ -10,8 +10,8 @@ class TestGame < Test::Unit::TestCase
   def test_new_round
     @game.new_round
     @game.players.each do |player|
-      assert_equal(player.hands[0].cards.length, 2)
+      assert_equal(player.hand.cards.length, 2)
     end
-    assert_equal(@game.dealer.hands[0].cards.length, 2)
+    assert_equal(@game.dealer.hand.cards.length, 2)
   end
 end

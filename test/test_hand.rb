@@ -31,7 +31,7 @@ class TestHand < Test::Unit::TestCase
 
   def test_split
     player = Player.new('Test')
-    hand = player.hands[0]
+    hand = player.hand
     hand.current_bet = 100
     hand.add_card Card.new('♣', '9')
     hand.add_card Card.new('♥', '9')

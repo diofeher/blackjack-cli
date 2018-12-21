@@ -35,7 +35,7 @@ class GameInteraction
   def dealer_play
     show_header('DEALER\'S TIME!')
     @game.dealer_round
-    puts @game.dealer.hands[0].status
+    puts @game.dealer.hand.status
   end
 
   def players_play
@@ -64,10 +64,9 @@ class GameInteraction
       case option
       when '1'
         puts 'HIT!'
-        if !@game.hit(hand)
-          puts hand.status
-          break
-        end
+        success = @game.hit(hand)
+        puts hand.status
+        break if !success
       when '2'
         puts 'STAND!'
         break
