@@ -56,13 +56,11 @@ class Game
   end
 
   def players_round
-    @dealer.hands[0].add_card @deck.hit
-    @dealer.hands[0].add_card @deck.hit
+    2.times { @dealer.hands[0].add_card @deck.hit }
     @players.each do |player|
       next if player.money.zero?
 
-      player.hands[0].add_card @deck.hit
-      player.hands[0].add_card @deck.hit
+      2.times { player.hands[0].add_card @deck.hit }
       player.hands.each do |hand|
         puts "\n#{player.name}: $#{player.money} left"
         puts hand.status
